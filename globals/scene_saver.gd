@@ -2,6 +2,7 @@ class_name scene_manager
 extends Node
 
 var current_scene: Node = null
+
 func _ready():
 	var root := get_tree().root
 	current_scene = root.get_child(root.get_child_count()-1)
@@ -10,7 +11,7 @@ func switch_scene(new_path):
 	new_path = _get_load_path(new_path)
 	call_deferred("_deffered_switch_scene", new_path)
 
-func _deffered_switch_scene(new_path):
+func _deffered_switch_scene(new_path): #switches scenes on idle frames so we dont interrupt anything
 	_save_scene()
 	current_scene.free()
 	var scene := load(new_path)
@@ -18,13 +19,13 @@ func _deffered_switch_scene(new_path):
 	get_tree().root.add_child(current_scene)
 	get_tree().current_scene = current_scene
 
-func _save_scene():
+func _save_scene(): #packs scene and all its data to file in separate folder
 	var path_arr: PackedStringArray = current_scene.path.split("/")
 	var packed_scene := PackedScene.new()
 	packed_scene.pack(current_scene)
 	ResourceSaver.save(packed_scene,"res://saved_scenes/"+path_arr[path_arr.size()-1])
 
-func _get_load_path(new_path) -> String:
+func _get_load_path(new_path) -> String: #checks if we already saved scene to file and can just load it from there
 	var files = DirAccess.open("res://saved_scenes/").get_files()
 	for file in files:
 		var arr = new_path.split('/')

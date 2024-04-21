@@ -8,6 +8,7 @@ var active: bool = false
 var index: int = 0
 
 func set_icon(path: String):
+	#if icon is not a placeholder then set item to active
 	if path != "res://sprites/px.png" : active = true
 	else: active = false
 	icon.texture = load(path)

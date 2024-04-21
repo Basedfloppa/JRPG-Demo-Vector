@@ -6,8 +6,8 @@ extends Node2D
 
 func _on_collectable_area_body_entered(_body):
 	for node in area.get_overlapping_bodies():
-		if(node.name == "Character"):
+		if(node.name == "Character"): #gets character node
 			node.on_collectable_collected(str(ItemsDb.Types.keys()[type]),self)
 
 func _ready():
-	sprite.texture = load(ItemsDb.Items[str(ItemsDb.Types.keys()[type])]["icon"])
+	sprite.texture = load(ItemsDb.Items[str(ItemsDb.Types.keys()[type])]["icon"]) #set texture that corresponds with item type

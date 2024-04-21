@@ -1,9 +1,9 @@
 class_name collectable_items
 extends Node
 
-const item_path: String = "res://sprites/"
+const item_path: String = "res://sprites/" #template path for sprites
 enum Types {Key,Apple,Orange,Pepper,Olive,AlarmPotion,TeleportationPotion,Amulet,Coin}
-const Items: Dictionary = {
+const Items: Dictionary = { #"json" object that stores all items and their values
 	"Key": {
 		"name": "",
 		"description": "",
