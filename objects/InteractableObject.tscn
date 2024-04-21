@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmun7d6llrl03"]
+
+[ext_resource type="Script" path="res://objects/InteractableObject.gd" id="1_r57yt"]
+[ext_resource type="Texture2D" uid="uid://dsd1ihkdnml57" path="res://sprites/icon.svg" id="2_ff80t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtfbh"]
+size = Vector2(158, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4xud"]
+size = Vector2(128, 128)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oxm6u"]
+blend_mode = 2
+
+[node name="InteractiveObject" type="StaticBody2D"]
+scale = Vector2(1, 0.5)
+script = ExtResource("1_r57yt")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_rtfbh")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v4xud")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture_filter = 3
+material = SubResource("CanvasItemMaterial_oxm6u")
+texture = ExtResource("2_ff80t")

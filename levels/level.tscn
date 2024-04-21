@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://dpotbby2dqau1"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_fy8vp"]
+[ext_resource type="Texture2D" uid="uid://bsuus813o7fph" path="res://sprites/1560269815grass-png-top-view.jpg" id="1_mecgn"]
+[ext_resource type="PackedScene" uid="uid://cigpg0bid502a" path="res://partial/ui.tscn" id="2_uydcd"]
+[ext_resource type="PackedScene" uid="uid://bus174id0suhl" path="res://character/Character.tscn" id="3_5sa72"]
+[ext_resource type="PackedScene" uid="uid://c7oodl7wgyhbd" path="res://objects/CollectableObject.tscn" id="4_spxhd"]
+[ext_resource type="PackedScene" uid="uid://dmun7d6llrl03" path="res://objects/InteractableObject.tscn" id="5_88f7p"]
+[ext_resource type="PackedScene" uid="uid://cilpoe423bkl6" path="res://objects/house.tscn" id="6_xf3yu"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yuhwn"]
+b = Vector2(0, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_73an0"]
+a = Vector2(1154, 0)
+b = Vector2(1154, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xs4y0"]
+a = Vector2(1154, 650)
+b = Vector2(0, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dy3gd"]
+b = Vector2(1154, 0)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_fy8vp")
+path = "res://levels/level.tscn"
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="rightWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_yuhwn")
+
+[node name="leftWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_73an0")
+
+[node name="bottomWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_xs4y0")
+
+[node name="topWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_dy3gd")
+
+[node name="background" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(581.5, 329.875)
+scale = Vector2(1.81385, 1.56524)
+texture = ExtResource("1_mecgn")
+
+[node name="Character" parent="." instance=ExtResource("3_5sa72")]
+position = Vector2(572, 552)
+
+[node name="UI" parent="Character" instance=ExtResource("2_uydcd")]
+show_behind_parent = true
+z_index = 10
+layout_direction = 1
+offset_left = -577.0
+offset_top = -323.0
+offset_right = 573.0
+offset_bottom = 327.0
+
+[node name="Camera" type="Camera2D" parent="Character"]
+
+[node name="Collectable" type="Node2D" parent="."]
+
+[node name="CollectableObject" parent="Collectable" instance=ExtResource("4_spxhd")]
+position = Vector2(476, 553)
+type = 6
+
+[node name="CollectableObject2" parent="Collectable" instance=ExtResource("4_spxhd")]
+position = Vector2(1060, 411)
+
+[node name="Interactable" type="Node2D" parent="."]
+
+[node name="InteractiveObject" parent="Interactable" instance=ExtResource("5_88f7p")]
+position = Vector2(313, 428)
+message = "this is a message of current interactable object"
+
+[node name="InteractiveObject2" parent="Interactable" instance=ExtResource("5_88f7p")]
+position = Vector2(854, 427)
+message = "if you dont want to die, dont stand in fire"
+
+[node name="Homes" type="Node2D" parent="."]
+
+[node name="House" parent="Homes" instance=ExtResource("6_xf3yu")]
+position = Vector2(278, 186)
+
+[node name="House2" parent="Homes" instance=ExtResource("6_xf3yu")]
+position = Vector2(634, 183)
+
+[node name="House3" parent="Homes" instance=ExtResource("6_xf3yu")]
+position = Vector2(957, 183)

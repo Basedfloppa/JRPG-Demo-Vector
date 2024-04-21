@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7oodl7wgyhbd"]
+
+[ext_resource type="Script" path="res://objects/CollectableObject.gd" id="1_e46f1"]
+[ext_resource type="Texture2D" uid="uid://dsd1ihkdnml57" path="res://sprites/icon.svg" id="2_ckdif"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8o4i"]
+radius = 84.006
+
+[node name="CollectableObject" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_e46f1")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ckdif")
+
+[node name="CollectableArea" type="Area2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="Collision" type="CollisionShape2D" parent="CollectableArea"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_s8o4i")
+
+[connection signal="area_entered" from="CollectableArea" to="." method="_on_collectable_area_area_entered"]
+[connection signal="area_shape_entered" from="CollectableArea" to="." method="_on_collectable_area_area_shape_entered"]
+[connection signal="body_entered" from="CollectableArea" to="." method="_on_collectable_area_body_entered"]

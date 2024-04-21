@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=3 uid="uid://b8brpwphbcyh3"]
+
+[ext_resource type="Texture2D" uid="uid://cu5stm556mce4" path="res://sprites/hxzg435e.bmp" id="1_sspgj"]
+[ext_resource type="Script" path="res://levels/level.gd" id="1_y0g07"]
+[ext_resource type="Texture2D" uid="uid://b0cb5cleoxbe6" path="res://sprites/9gvwvb1a.bmp" id="2_h75vu"]
+[ext_resource type="Texture2D" uid="uid://dsd1ihkdnml57" path="res://sprites/icon.svg" id="2_pj02u"]
+[ext_resource type="PackedScene" uid="uid://cigpg0bid502a" path="res://partial/ui.tscn" id="3_bobp6"]
+[ext_resource type="Script" path="res://levels/ExitArea.gd" id="4_6ubc3"]
+[ext_resource type="PackedScene" uid="uid://dmun7d6llrl03" path="res://objects/InteractableObject.tscn" id="4_ai8wn"]
+[ext_resource type="PackedScene" uid="uid://c7oodl7wgyhbd" path="res://objects/CollectableObject.tscn" id="5_5wahw"]
+[ext_resource type="PackedScene" uid="uid://bus174id0suhl" path="res://character/Character.tscn" id="7_ehb3r"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vfxlk"]
+b = Vector2(0, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dtb4p"]
+a = Vector2(1154, 0)
+b = Vector2(1154, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xg560"]
+a = Vector2(1154, 650)
+b = Vector2(0, 650)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7mtpf"]
+a = Vector2(-1, 296)
+b = Vector2(1157, 296)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ls0rt"]
+blend_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20iqv"]
+size = Vector2(128, 123.871)
+
+[node name="Interior" type="Node2D"]
+script = ExtResource("1_y0g07")
+path = "res://levels/home_interior.tscn"
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="rightWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_vfxlk")
+
+[node name="leftWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_dtb4p")
+
+[node name="bottomWall" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("SegmentShape2D_xg560")
+
+[node name="topWall" type="CollisionShape2D" parent="Walls"]
+top_level = true
+shape = SubResource("SegmentShape2D_7mtpf")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(577, 326)
+scale = Vector2(4.20364, 3.53005)
+texture = ExtResource("1_sspgj")
+
+[node name="Wall" type="Sprite2D" parent="."]
+position = Vector2(577.5, 148)
+scale = Vector2(1.44125, 0.565385)
+texture = ExtResource("2_h75vu")
+
+[node name="floormat" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ls0rt")
+position = Vector2(579, 636)
+scale = Vector2(1, 0.242187)
+texture = ExtResource("2_pj02u")
+
+[node name="ExitArea" type="Area2D" parent="floormat"]
+script = ExtResource("4_6ubc3")
+
+[node name="Collision" type="CollisionShape2D" parent="floormat/ExitArea"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_20iqv")
+
+[node name="Interactive" type="Node2D" parent="."]
+
+[node name="InteractiveObject" parent="Interactive" instance=ExtResource("4_ai8wn")]
+position = Vector2(1038, 560)
+message = "why are you here"
+
+[node name="InteractiveObject2" parent="Interactive" instance=ExtResource("4_ai8wn")]
+position = Vector2(123, 574)
+message = "pls leave"
+
+[node name="Collectable" type="Node2D" parent="."]
+
+[node name="CollectableObject" parent="Collectable" instance=ExtResource("5_5wahw")]
+position = Vector2(333, 391)
+type = 7
+
+[node name="CollectableObject2" parent="Collectable" instance=ExtResource("5_5wahw")]
+position = Vector2(562, 383)
+type = 3
+
+[node name="CollectableObject3" parent="Collectable" instance=ExtResource("5_5wahw")]
+position = Vector2(771, 376)
+type = 6
+
+[node name="Character" parent="." instance=ExtResource("7_ehb3r")]
+position = Vector2(572, 522)
+
+[node name="UI" parent="Character" instance=ExtResource("3_bobp6")]
+layout_direction = 1
+offset_left = -574.0
+offset_top = -315.0
+offset_right = 578.0
+offset_bottom = 325.0
+
+[node name="Camera" type="Camera2D" parent="Character"]
+
+[connection signal="body_entered" from="floormat/ExitArea" to="floormat/ExitArea" method="_on_body_entered"]

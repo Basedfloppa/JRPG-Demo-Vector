@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cigpg0bid502a"]
+
+[ext_resource type="Script" path="res://partial/ui.gd" id="1_redre"]
+
+[node name="UI" type="Control"]
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_redre")
+metadata/_edit_use_anchors_ = true
+
+[node name="Values" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HpValContainer" type="HBoxContainer" parent="Values"]
+layout_mode = 2
+
+[node name="HpLabel" type="Label" parent="Values/HpValContainer"]
+layout_mode = 2
+text = "HP:"
+
+[node name="HpVal" type="Label" parent="Values/HpValContainer"]
+layout_mode = 2
+text = "10/10"
+
+[node name="KeysValContainer" type="HBoxContainer" parent="Values"]
+layout_mode = 2
+
+[node name="KeysLabel" type="Label" parent="Values/KeysValContainer"]
+layout_mode = 2
+text = "Keys:"
+
+[node name="KeysVal" type="Label" parent="Values/KeysValContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="InteractiveLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -23.0
+offset_right = 115.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "erhgdtgfjadgsfh"
+horizontal_alignment = 1
+vertical_alignment = 1

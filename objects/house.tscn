@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cilpoe423bkl6"]
+
+[ext_resource type="Script" path="res://objects/house.gd" id="1_cumna"]
+[ext_resource type="Texture2D" uid="uid://ce5bqiugae0a" path="res://sprites/—Pngtree—vector house icon_4013710.png" id="2_al3ve"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w628r"]
+size = Vector2(175, 100)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r1w6r"]
+radius = 11.0
+height = 34.0
+
+[node name="House" type="StaticBody2D"]
+script = ExtResource("1_cumna")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_al3ve")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 50)
+shape = SubResource("RectangleShape2D_w628r")
+
+[node name="TransitionArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="TransitionArea"]
+position = Vector2(0, 96)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_r1w6r")
+
+[connection signal="body_entered" from="TransitionArea" to="." method="_on_transition_area_body_entered"]
